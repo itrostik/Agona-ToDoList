@@ -42,14 +42,18 @@ function ready() {
       tasksHTMLString +=
         '<div class="main__tasks-block task-block task__done"><p class="task-block__text">' +
         tasks[i].text +
-        '</p><div class="task-block__buttons"><div class="task-button__done"><img src="./img/check.svg" alt="" /></div><div class="task-button__delete" id="' +
+        '</p><div class="task-block__buttons"><div class="task-button__done" id="' +
+        valueId +
+        '"><img src="./img/check.svg" alt="" /></div><div class="task-button__delete" id="' +
         valueId +
         '"><img src="./img/times.svg" alt="" /></div></div></div>';
     } else {
       tasksHTMLString +=
         '<div class="main__tasks-block task-block"><p class="task-block__text">' +
         tasks[i].text +
-        '</p><div class="task-block__buttons"><div class="task-button__done"><img src="./img/check.svg" alt="" /></div><div class="task-button__delete" id="' +
+        '</p><div class="task-block__buttons"><div class="task-button__done" id="' +
+        valueId +
+        '"><img src="./img/check.svg" alt="" /></div><div class="task-button__delete" id="' +
         valueId +
         '"><img src="./img/times.svg" alt="" /></div></div></div>';
     }
@@ -72,10 +76,13 @@ function ready() {
   doneTaskButtons.forEach((doneButton) => {
     doneButton.addEventListener("click", (event) => {
       tasks.forEach((item) => {
+        console.log(+event.target.parentNode.id);
         if (item.id === +event.target.parentNode.id) {
           item.done = true;
+          console.log(item.done);
         }
       });
+      console.log(tasks);
       localStorage.setItem("tasks", JSON.stringify(tasks));
       event.target.parentNode.parentNode.parentNode.classList.add("task__done");
     });
